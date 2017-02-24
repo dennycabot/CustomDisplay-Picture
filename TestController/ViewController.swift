@@ -10,9 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var channelView: DPChannelView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        channelView.setChannelShape(.square)
+        channelView.setChannelImage(UIImage(named: "veeram")!)
+        
+        print("Width: \(self.channelView.frame.size.width), Height: \(self.channelView.frame.size.height)")
     }
 
     override func didReceiveMemoryWarning() {
