@@ -15,7 +15,6 @@
 		EF7EDD3A1E5D5F2700FD35F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF7EDD381E5D5F2700FD35F0 /* LaunchScreen.storyboard */; };
 		EF7EDD421E5D5F5B00FD35F0 /* DPChannelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EDD411E5D5F5B00FD35F0 /* DPChannelView.swift */; };
 		EF7EDD441E5D5FF800FD35F0 /* DPEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7EDD431E5D5FF800FD35F0 /* DPEnums.swift */; };
-		EF7EDD461E5D631900FD35F0 /* DPChannelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF7EDD451E5D631900FD35F0 /* DPChannelView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		EF7EDD3B1E5D5F2700FD35F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF7EDD411E5D5F5B00FD35F0 /* DPChannelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPChannelView.swift; sourceTree = "<group>"; };
 		EF7EDD431E5D5FF800FD35F0 /* DPEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPEnums.swift; sourceTree = "<group>"; };
-		EF7EDD451E5D631900FD35F0 /* DPChannelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DPChannelView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +65,6 @@
 				5DBF29C41E600FBA0051E865 /* DPBadgeView.swift */,
 				EF7EDD331E5D5F2700FD35F0 /* Main.storyboard */,
 				EF7EDD411E5D5F5B00FD35F0 /* DPChannelView.swift */,
-				EF7EDD451E5D631900FD35F0 /* DPChannelView.xib */,
 				EF7EDD431E5D5FF800FD35F0 /* DPEnums.swift */,
 				EF7EDD381E5D5F2700FD35F0 /* LaunchScreen.storyboard */,
 				EF7EDD3B1E5D5F2700FD35F0 /* Info.plist */,
@@ -137,7 +134,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF7EDD3A1E5D5F2700FD35F0 /* LaunchScreen.storyboard in Resources */,
-				EF7EDD461E5D631900FD35F0 /* DPChannelView.xib in Resources */,
 				EF774CB51E5EA0BE00A9AC1A /* Assets.xcassets in Resources */,
 				EF7EDD351E5D5F2700FD35F0 /* Main.storyboard in Resources */,
 			);

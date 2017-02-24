@@ -12,53 +12,44 @@ import UIKit
 class DPChannelView: UIView {
 
     //MARK:- Properties
-    var view: UIView!
     var imageView: UIImageView!
-    
-    var shape: ViewShape = .square {
-        didSet {
-            self.setChannelShape(shape)
-        }
-    }
-    
-    @IBInspectable var image: UIImage? {
-        didSet {
-            if (imageView != nil) {
-                self.imageView?.image = image
-            }
-        }
-    }
+    var shape: ViewShape = .square
+    var image: UIImage?
+    var borderWidth: CGFloat = 0
+    var borderColor: UIColor = .clear
     
     //MARK:- Inits
     func setup() {
-        view = loadViewFromNib()
-        view.frame = bounds
+        
+        /* Setup View */
+        contentMode = .scaleAspectFill
+        
+        /* Setup Image View */
+        imageView = UIImageView(frame: bounds)
+        print("\(imageView.frame), \(frame)")
+        layer.masksToBounds = true
+        clipsToBounds = true
+        imageView?.contentMode = .scaleAspectFill
+        
+        if (image != nil) {
+            imageView.image = image
+        }
+        
+        if borderWidth != 0 {
+            imageView.layer.borderWidth = borderWidth
+            imageView.layer.borderColor = borderColor.cgColor
+        }
+        
+        if (shape == .circle) {
+            layer.cornerRadius = min(frame.size.width / 2.0, frame.size.height / 2.0)
+        }
 
-        imageView = UIImageView(frame: view.frame)
-//        imageView?.contentMode = .scaleAspectFit
-//      view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        addSubview(view)
-
-        view.addSubview(imageView!)
-        
-    }
-    
-    func loadViewFromNib() -> UIView {
-        
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "DPChannelView", bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        
-        return view
+        addSubview(imageView!)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        
-        if (image != nil) {
-            self.imageView?.image = image!
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,33 +57,18 @@ class DPChannelView: UIView {
         setup()
     }
     
+    //MARK:-  Public Methods
+    
     public func setChannelImage(_ image: UIImage) {
-        
         imageView?.image = image
-        
-//        imageView.contentMode = .center
-//        
-//        if (imageView.bounds.size.width < image.size.width || imageView.bounds.size.height < image.size.height) {
-//            imageView.contentMode = .scaleAspectFit
-//        }
-//        
-//        imageView.contentMode = .scaleAspectFit
+        print(imageView.frame)
     }
     
     public func setChannelShape(_ shape: ViewShape) {
         
         if (shape == .circle) {
-//
-//            print("\(frame.size.width, frame.size.height)")
-//            
-//            if (frame.size.width != frame.size.height) {
-//                frame.size.height = frame.size.width
-//            }
-//            
             layer.masksToBounds = true
-            layer.cornerRadius = frame.size.width / 2.0
-            layer.borderColor = UIColor.blue.cgColor
-            layer.borderWidth = 2
+            layer.cornerRadius = min(frame.size.width / 2.0, frame.size.height / 2.0)
             clipsToBounds = true
         }
     }

@@ -16,8 +16,6 @@ class ViewController: UIViewController {
         
         channelView.setChannelShape(.circle)
         channelView.setChannelImage(UIImage(named: "veeram")!)
-        
-        print("Width: \(self.channelView.frame.size.width), Height: \(self.channelView.frame.size.height)")
     }
 
     override func didReceiveMemoryWarning() {
