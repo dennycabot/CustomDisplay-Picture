@@ -32,12 +32,15 @@ class DPChannelView: UIView {
     //MARK:- Inits
     func setup() {
         view = loadViewFromNib()
-        view.frame = self.frame
+        view.frame = bounds
+
         imageView = UIImageView(frame: view.frame)
-        imageView?.contentMode = .scaleAspectFit
+//        imageView?.contentMode = .scaleAspectFit
 //      view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         addSubview(view)
+
         view.addSubview(imageView!)
+        
     }
     
     func loadViewFromNib() -> UIView {
@@ -79,15 +82,17 @@ class DPChannelView: UIView {
     public func setChannelShape(_ shape: ViewShape) {
         
         if (shape == .circle) {
-            
-            print("\(frame.size.width, frame.size.height)")
-            
-            if (frame.size.width != frame.size.height) {
-                frame.size.height = frame.size.width
-            }
-            
+//
+//            print("\(frame.size.width, frame.size.height)")
+//            
+//            if (frame.size.width != frame.size.height) {
+//                frame.size.height = frame.size.width
+//            }
+//            
             layer.masksToBounds = true
             layer.cornerRadius = frame.size.width / 2.0
+            layer.borderColor = UIColor.blue.cgColor
+            layer.borderWidth = 2
             clipsToBounds = true
         }
     }

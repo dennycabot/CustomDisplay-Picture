@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        channelView.setChannelShape(.square)
+        channelView.setChannelShape(.circle)
         channelView.setChannelImage(UIImage(named: "veeram")!)
         
         print("Width: \(self.channelView.frame.size.width), Height: \(self.channelView.frame.size.height)")
