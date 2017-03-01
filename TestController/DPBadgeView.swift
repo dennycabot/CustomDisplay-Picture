@@ -66,7 +66,6 @@ class DPBadgeView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        setup()
     }
     
     override func draw(_ rect: CGRect) {

@@ -41,7 +41,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="dpView" destination="0eq-TW-cCl" id="Kt3-3U-WXR"/>
+                        <outlet property="dpView" destination="0eq-TW-cCl" id="Caf-p3-2K6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

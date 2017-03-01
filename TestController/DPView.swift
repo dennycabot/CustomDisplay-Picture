@@ -18,36 +18,16 @@ class DPView: UIView {
     private var channelView: DPChannelView!
 
     /* Attributes of Profile Image View */
-    var shape: ViewShape = .square
-    var profileImage: UIImage?
-    var profileName: String = ""
-    var font: UIFont?
-    var textColor: UIColor?
-    var borderWidth: CGFloat = 0
-    var borderColor: UIColor = .clear
-    var profileBackgroundColors: [UIColor] = [.white]
+    private var shape: ViewShape = .square
+    private var profileImage: UIImage?
+    private var profileName: String = ""
+    private var font: UIFont?
+    private var textColor: UIColor?
+    private var borderWidth: CGFloat = 0
+    private var borderColor: UIColor = .clear
+    private var profileBackgroundColors: [UIColor] = [.white]
     
-    
-    /* Attributes of Badge View */
-    var isBadgeEnabled = false
-    var badgeShape: ViewShape = .square
-    var badgeImage: UIImage?
-    var badgeCount: Int = 0
-    var badgeTextColor: UIColor?
-    var badgeBackgroundColors: [UIColor] = [.white]
-    var badgeBorderWidth: CGFloat = 0
-    var badgeBorderColor: UIColor = .clear
-    var badgePosition: ViewPosition = .topRight
     var badgeSizeScale: CGFloat = 0.25
-    
-    
-    /* Attributes of Channel View */
-    var isChannelEnabled = true
-    var channelShape: ViewShape = .square
-    var channelImage: UIImage?
-    var channelBorderWidth: CGFloat = 0
-    var channelBorderColor: UIColor = .clear
-    var channelPosition: ViewPosition = .bottomRight
     var channelSizeScale: CGFloat = 0.25
     
     //MARK:- Inits
@@ -74,19 +54,15 @@ class DPView: UIView {
         if (shape == .circle) {
             imageView.layer.cornerRadius = min(frame.size.width / 2.0, frame.size.height / 2.0)
         }
+
+        addSubview(imageView)
         
-        addSubview(imageView!)
-        
-        /* Setup Badge View */
-        if isBadgeEnabled {
-            badgeView = createBadgeView()
-            addSubview(badgeView)
+        if badgeView != nil {
+            bringSubview(toFront: badgeView)
         }
         
-        /* Setup Channel View */
-        if isChannelEnabled {
-            channelView = createChannelView()
-            addSubview(channelView)
+        if channelView != nil {
+            bringSubview(toFront: channelView)
         }
     }
 
@@ -102,7 +78,47 @@ class DPView: UIView {
         setup()
     }
     
-    private func createBadgeView() -> DPBadgeView {
+    //MARK- Public Methods
+    
+    /* Public Methods for Profile View */
+    func setProfile(with profileName: String, and shape: ViewShape) {
+        self.profileName = profileName
+        self.shape = shape
+        setup()
+    }
+    
+    func setProfile(with profileImage: UIImage, and shape: ViewShape) {
+        self.profileImage = profileImage
+        self.shape = shape
+        setup()
+    }
+    
+    func setImage(_ image: UIImage) {
+        self.profileImage = image
+    }
+    
+    func setName(_ name: String) {
+        self.profileName = name
+        imageView.image = UIImage.imageWith(text: name, frame: imageView.bounds, font: nil, textColor: nil, backgroundColors: nil)
+    }
+    
+    func setBorder(with width: CGFloat, and color: UIColor) {
+        self.borderWidth = width
+        self.borderColor = color
+    }
+    
+    func setBackgroundColors(_ colors: [UIColor]) {
+        //Gradient Layer Here
+    }
+
+    /* Public Methods for Badge View */
+    func addBadgeView(at position: ViewPosition, shape: ViewShape, initialCount: Int) {
+        
+        /* Remove Existing BadgeViews If Any */
+        if badgeView != nil {
+            badgeView.removeFromSuperview()
+            badgeView = nil
+        }
         
         //Bound Points
         let width = frame.size.width * badgeSizeScale
@@ -113,7 +129,7 @@ class DPView: UIView {
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         
-        switch badgePosition {
+        switch position {
         case .bottomLeft:
             x = xLeft
             y = yBottom - width
@@ -132,19 +148,41 @@ class DPView: UIView {
             y = yTop
         }
         
-        let badge = DPBadgeView(frame: CGRect(x: x, y: y, width: width, height: width))
-        
-        badge.count = badgeCount
-        badge.shape = badgeShape
-        badge.backgroundColors = badgeBackgroundColors
-        badge.borderColor = badgeBorderColor
-        badge.borderWidth = badgeBorderWidth
-        badge.shape = badgeShape
-        
-        return badge
+        /* Create Channel View */
+        badgeView = DPBadgeView(frame: CGRect(x: x, y: y, width: width, height: width))
+        badgeView.shape = shape
+        badgeView.count = initialCount
+        addSubview(badgeView)
     }
     
-    private func createChannelView() -> DPChannelView {
+    func setBadgeBackground(with colors: [UIColor]) {
+        //Method for Adding Gradient Layer Here
+    }
+    
+    func setBadgeBorder(with width: CGFloat, and color: UIColor) {
+        
+        if badgeView != nil {
+            self.badgeView.borderWidth = width
+            self.badgeView.borderColor = color
+        }
+        
+        else {
+            fatalError("ChannelView is not Initialized!")
+        }
+    }
+    
+    func setBadgeCount(_ count: Int) {
+        badgeView.count = count
+    }
+    
+    /* Public Methods for Channel View */
+    func addChannelView(at position: ViewPosition, shape: ViewShape, image: UIImage) {
+        
+        /* Remove Existing BadgeViews If Any */
+        if channelView != nil {
+            channelView.removeFromSuperview()
+            channelView = nil
+        }
         
         //Bound Points
         let width = frame.size.width * channelSizeScale
@@ -155,7 +193,7 @@ class DPView: UIView {
         var x: CGFloat = 0.0
         var y: CGFloat = 0.0
         
-        switch channelPosition {
+        switch position {
         case .bottomLeft:
             x = xLeft
             y = yBottom - width
@@ -174,58 +212,22 @@ class DPView: UIView {
             y = yTop
         }
         
-        let channel = DPChannelView(frame: CGRect(x: x, y: y, width: width, height: width))
+        /* Create Channel View */
+        channelView = DPChannelView(frame: CGRect(x: x, y: y, width: width, height: width))
+        channelView.image = image
+        channelView.shape = shape
+        addSubview(channelView)
+    }
+    
+    func setChannelBorder(with width: CGFloat, and color: UIColor) {
         
-        channel.borderColor = channelBorderColor
-        channel.borderWidth = channelBorderWidth
-        channel.image = channelImage
-        channel.shape = channelShape
-        channel.backgroundColor = .white
+        if channelView != nil {
+            self.channelView.borderWidth = width
+            self.channelView.borderColor = color
+        }
         
-        return channel
+        else {
+            fatalError("ChannelView is not Initialized!")
+        }
     }
-    
-    //MARK- Public Methods for Profile View
-    init(with profileName: String, and shape: ViewShape) {
-        self.init()
-        self.profileName = profileName
-        self.shape = shape
-        setup()
-    }
-    
-    init(with profileImage: UIImage, and shape: ViewShape) {
-        self.init()
-        self.profileImage = profileImage
-        self.shape = shape
-    }
-    
-    func addBorder(with width: CGFloat, and color: UIColor) {
-        self.borderWidth = width
-        self.borderColor = color
-    }
-
-    
-    func setBadgeViewBackground(with colors: [UIColor]) {
-        //Method for Adding Gradient Layer Here
-    }
-    
-    func enableBadgeCount() {
-        self.isBadgeEnabled = true
-        //Show Badge
-    }
-    
-    func disableBadgeCount() {
-        self.isBadgeEnabled = false
-        //Hide Badge
-    }
-    
-    func addBadgeViewBorder(with width: CGFloat, and color: UIColor) {
-        self.badgeView.borderWidth = width
-        self.badgeView.borderColor = color
-    }
-    
-    func setBadgeViewShape(_ shape: ViewShape) {
-        badgeView.shape = shape
-    }
-    
 }

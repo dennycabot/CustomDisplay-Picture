@@ -11,36 +11,23 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var dpView: DPView!
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         /* Configure Profile View */
-//        dpView.profileImage = UIImage(named: "apple")
-        dpView.profileName = "Barney Stinson"
-        dpView.shape = .circle
-        dpView.borderColor = .orange
-        dpView.borderWidth = 3.0
-        dpView.profileBackgroundColors = [.yellow]
+//        dpView.setProfile(with: UIImage(named: "apple")!, and: .circle)
+        dpView.setProfile(with: "Barney Stinson", and: .circle)
+        dpView.setBorder(with: 3.0, and: .orange)
+        dpView.setBackgroundColors([.yellow])
         
-        /* Configure Channel View */
-        dpView.channelImage = UIImage(named: "apple")
-        dpView.channelShape = .circle
-        dpView.channelBorderColor = .orange
-        dpView.channelBorderWidth = 2.0
-        dpView.isChannelEnabled = true
-        dpView.channelPosition = .bottomRight
+        dpView.addChannelView(at: .bottomRight, shape: .circle, image: UIImage(named: "apple")!)
+        dpView.setChannelBorder(with: 2.0, and: .orange)
         
-        dpView.isBadgeEnabled = true
-        dpView.badgePosition = .topRight
-        dpView.badgeShape = .circle
-        dpView.badgeCount = 3
-        dpView.badgeBackgroundColors = [UIColor.yellow]
-        dpView.badgeBorderWidth = 2.0
-        dpView.badgeBorderColor = .orange
-        
-        
-        //MARK:- TODO: Write Public Methods for All Configurations and Make Properties Private
+        dpView.addBadgeView(at: .topRight, shape: .circle, initialCount: 0)
+        dpView.setBadgeBackground(with: [.yellow])
+        dpView.setBadgeBorder(with: 2.0, and: .orange)
+        dpView.setBadgeCount(5)
     }
 
     override func didReceiveMemoryWarning() {

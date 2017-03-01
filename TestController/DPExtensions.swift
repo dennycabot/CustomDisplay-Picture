@@ -11,7 +11,7 @@ import UIKit
 
 extension UIImage {
     
-    class func imageWith(text: String, frame: CGRect, font: UIFont?, textColor: UIColor?, backgroundColors: [UIColor]) -> UIImage {
+    class func imageWith(text: String, frame: CGRect, font: UIFont?, textColor: UIColor?, backgroundColors: [UIColor]?) -> UIImage {
         
         /* Create Label With Text */
         let label = UILabel(frame: frame)
@@ -35,7 +35,9 @@ extension UIImage {
             label.textColor = textColor
         }
         
-        label.backgroundColor = backgroundColors.first //Edit to Add Gradient Layer
+        if backgroundColors != nil {
+            label.backgroundColor = backgroundColors?.first //Edit to Add Gradient Layer
+        }
         
         /* Create Image with Label */
         UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, 0.0)
@@ -51,8 +53,12 @@ extension String {
     /* Create Initials from Full Name */
     func initials() -> String {
         
-        let profileNameArr = self.components(separatedBy: " ")
+        var profileNameArr = self.components(separatedBy: " ")
         var initials = ""
+        
+        if profileNameArr.count > 1 {
+            profileNameArr = [profileNameArr.first!, profileNameArr.last!]
+        }
         
         for name in profileNameArr {
             initials = initials + String(name.characters.first!)
@@ -60,6 +66,4 @@ extension String {
         
         return initials
     }
-    
-    //MARK:- TODO: Consider "." also for Separation
 }
