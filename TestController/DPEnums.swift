@@ -21,3 +21,5 @@ enum ViewPosition {
     case bottomRight
 }
 
+//MARK:- TODO: Separate Position Enums for Badge (Only Top) and Channel (Only Bottom)
+

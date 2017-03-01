@@ -8,7 +8,6 @@
 
 import UIKit
 
-@IBDesignable
 class DPChannelView: UIView {
 
     //MARK:- Properties
@@ -23,21 +22,22 @@ class DPChannelView: UIView {
         
         /* Setup View */
         contentMode = .scaleAspectFill
+        layer.masksToBounds = true
+        clipsToBounds = true
+        contentMode = .scaleAspectFill
+        backgroundColor = .clear
         
         /* Setup Image View */
         imageView = UIImageView(frame: bounds)
-        print("\(imageView.frame), \(frame)")
-        layer.masksToBounds = true
-        clipsToBounds = true
-        imageView?.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         
         if (image != nil) {
             imageView.image = image
         }
         
         if borderWidth != 0 {
-            imageView.layer.borderWidth = borderWidth
-            imageView.layer.borderColor = borderColor.cgColor
+            layer.borderWidth = borderWidth
+            layer.borderColor = borderColor.cgColor
         }
         
         if (shape == .circle) {
@@ -49,11 +49,13 @@ class DPChannelView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func draw(_ rect: CGRect) {
         setup()
     }
     

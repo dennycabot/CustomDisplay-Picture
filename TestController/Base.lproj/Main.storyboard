@@ -22,26 +22,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pyh-MX-T37" customClass="DPChannelView" customModule="TestController" customModuleProvider="target">
-                                <rect key="frame" x="38" y="184" width="300" height="300"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eq-TW-cCl" customClass="DPView" customModule="TestController" customModuleProvider="target">
+                                <rect key="frame" x="67" y="214" width="240" height="240"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Pyh-MX-T37" secondAttribute="height" multiplier="1:1" id="STN-oj-MXs"/>
-                                    <constraint firstAttribute="height" constant="300" id="tTz-QL-yPh"/>
+                                    <constraint firstAttribute="height" constant="240" id="alV-89-xdo"/>
+                                    <constraint firstAttribute="width" secondItem="0eq-TW-cCl" secondAttribute="height" multiplier="1:1" id="meO-Ow-Wj9"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="veeram"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Pyh-MX-T37" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Us5-Kv-rhf"/>
-                            <constraint firstItem="Pyh-MX-T37" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yx8-er-whh"/>
+                            <constraint firstItem="0eq-TW-cCl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4yy-zc-8Hu"/>
+                            <constraint firstItem="0eq-TW-cCl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uW4-xt-tQH"/>
                         </constraints>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <nil key="tintColor"/>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="channelView" destination="Pyh-MX-T37" id="bF5-9V-vvc"/>
+                        <outlet property="dpView" destination="0eq-TW-cCl" id="Kt3-3U-WXR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -49,7 +49,4 @@
             <point key="canvasLocation" x="116" y="122.78860569715144"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="veeram" width="675" height="1200"/>
-    </resources>
 </document>
