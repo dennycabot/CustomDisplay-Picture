@@ -11,7 +11,7 @@ import UIKit
 
 extension UIImage {
     
-    class func imageWith(text: String, frame: CGRect, font: UIFont?, textColor: UIColor?, backgroundColors: [UIColor]?) -> UIImage {
+    class func imageWith(text: String, frame: CGRect, font: UIFont?, textColor: UIColor?, backgroundColors: [CGColor]?) -> UIImage {
         
         /* Create Label With Text */
         let label = UILabel(frame: frame)
@@ -21,6 +21,8 @@ extension UIImage {
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 1
         label.lineBreakMode = .byWordWrapping
+        label.backgroundColor = UIColor.clear
+        
         let maximumLabelSize = CGSize(width: label.frame.size.width * 0.8, height: CGFloat.greatestFiniteMagnitude)
         let expectSize = label.sizeThatFits(maximumLabelSize)
         label.frame = CGRect(origin: CGPoint(x: label.frame.midX, y: label.frame.midY), size: CGSize(width: expectSize.width * 1.5, height: expectSize.height * 1.5))
@@ -35,15 +37,26 @@ extension UIImage {
             label.textColor = textColor
         }
         
+        // Create a uiview and add the label as subview. Adding sublayer to label hides it's text
+        let backgroundView = UIView(frame: label.frame)
+        backgroundView.backgroundColor = UIColor.white
         if backgroundColors != nil {
-            label.backgroundColor = backgroundColors?.first //Edit to Add Gradient Layer
+            if backgroundColors?.count == 1{
+                backgroundView.backgroundColor = UIColor(cgColor: (backgroundColors?.first)!)
+            }else{
+                backgroundView.addGradientLayer(with:backgroundColors!)
+            }
         }
+        
+        backgroundView.addSubview(label)
+        label.frame = backgroundView.bounds
         
         /* Create Image with Label */
         UIGraphicsBeginImageContextWithOptions(label.bounds.size, false, 0.0)
-        label.layer.render(in: UIGraphicsGetCurrentContext()!)
+        backgroundView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         return image!
     }
 }
@@ -66,4 +79,17 @@ extension String {
         
         return initials
     }
+}
+
+extension UIView {
+    
+    func addGradientLayer(with colors:[CGColor]){
+        
+       let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = colors
+        layer.addSublayer(gradientLayer)
+    }
+    
+    
 }

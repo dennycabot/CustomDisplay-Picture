@@ -25,7 +25,7 @@ class DPView: UIView {
     private var textColor: UIColor?
     private var borderWidth: CGFloat = 0
     private var borderColor: UIColor = .clear
-    private var profileBackgroundColors: [UIColor] = [.white]
+    private var profileBackgroundColors: [CGColor] = [UIColor.white.cgColor]
     
     var badgeSizeScale: CGFloat = 0.25
     var channelSizeScale: CGFloat = 0.25
@@ -93,13 +93,14 @@ class DPView: UIView {
         setup()
     }
     
+    
     func setImage(_ image: UIImage) {
         self.profileImage = image
     }
     
     func setName(_ name: String) {
         self.profileName = name
-        imageView.image = UIImage.imageWith(text: name, frame: imageView.bounds, font: nil, textColor: nil, backgroundColors: nil)
+        imageView.image = UIImage.imageWith(text: name, frame: imageView.bounds, font: nil, textColor: nil, backgroundColors: [])
     }
     
     func setBorder(with width: CGFloat, and color: UIColor) {
@@ -107,8 +108,12 @@ class DPView: UIView {
         self.borderColor = color
     }
     
-    func setBackgroundColors(_ colors: [UIColor]) {
+    func setBackgroundColors(_ colors: [CGColor]) {
         //Gradient Layer Here
+
+        self.profileBackgroundColors = colors
+        imageView.image = UIImage.imageWith(text: self.profileName, frame: imageView.bounds, font: nil, textColor: nil, backgroundColors: colors)
+
     }
 
     /* Public Methods for Badge View */
@@ -155,8 +160,15 @@ class DPView: UIView {
         addSubview(badgeView)
     }
     
-    func setBadgeBackground(with colors: [UIColor]) {
+    func setBadgeBackground(with colors: [CGColor]) {
         //Method for Adding Gradient Layer Here
+        if badgeView != nil{
+            if colors.count == 1{
+                badgeView.backgroundColor = UIColor(cgColor: colors.first!)
+            }else{
+                badgeView.addGradientLayer(with: colors)
+            }
+        }
     }
     
     func setBadgeBorder(with width: CGFloat, and color: UIColor) {

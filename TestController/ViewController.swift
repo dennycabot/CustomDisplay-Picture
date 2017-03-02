@@ -19,13 +19,14 @@ class ViewController: UIViewController {
 //        dpView.setProfile(with: UIImage(named: "apple")!, and: .circle)
         dpView.setProfile(with: "Barney Stinson", and: .circle)
         dpView.setBorder(with: 3.0, and: .orange)
-        dpView.setBackgroundColors([.yellow])
+        dpView.setBackgroundColors([UIColor.gray.cgColor])
+        
         
         dpView.addChannelView(at: .bottomRight, shape: .circle, image: UIImage(named: "apple")!)
         dpView.setChannelBorder(with: 2.0, and: .orange)
         
         dpView.addBadgeView(at: .topRight, shape: .circle, initialCount: 0)
-        dpView.setBadgeBackground(with: [.yellow])
+        dpView.setBadgeBackground(with: [UIColor.yellow.cgColor])
         dpView.setBadgeBorder(with: 2.0, and: .orange)
         dpView.setBadgeCount(5)
     }
